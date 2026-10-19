@@ -1,6 +1,6 @@
 ---
 name: blender
-description: 3D в Blender: собрать или поправить модель, отрендерить, экспортировать .glb для вкладки «Blender» мини-аппки. Use when: «собери модель», «сделай 3D», «поправь модель», правки из вкладки Blender, рендер сцены.
+description: "3D в Blender: собрать или поправить модель, отрендерить сцену, экспортировать .glb/.stl. Use when: «собери модель», «сделай 3D», «поправь модель», правки из вкладки Blender, рендер сцены, build a 3D model, fix/iterate a model, render a scene, export GLB."
 ---
 
 # Blender (3D-модели, рендеры, экспорт)
@@ -15,9 +15,14 @@ description: 3D в Blender: собрать или поправить модел�
 
 ## Инструменты и сервис
 - MCP-плагин `blender` (9 инструментов): главный — `execute_blender_code` (Python в живой Blender), плюс `get_scene_info`, `look` (взглянуть), `search_assets`/`import_asset`, `get_addon_status`, `disable_telemetry`.
-- Сервис `family-blender.service` — Blender 4.5 LTS под Xvfb, сокет `127.0.0.1:9876`. **Сцена одна на всю семью**: перед своей работой сохрани текущую сцену, если она не твоя.
+- **Два независимых инстанса Blender** (параллельная работа семьи):
+  - `family-blender.service` — экран :97, порт **9876** — владелец/демон, основная сцена;
+  - `family-blender-2.service` — экран :98, порт **9877** — задачи остальных профилей (blender-task автоматически ставит `BLENDER_PORT=9877` для не-owner).
+  В CLI-запусках инстанс выбирается env `BLENDER_PORT` (MCP-сервер читает его сам). Третий — по образцу `scripts/blender-run-2.sh` (свой Xvfb :N и порт 987N).
+  В задачах ты работаешь со СВОИМ инстансом: пустая сцена или чужая — нормально, не лезь в чужой порт.
+- Сервис один на инстанс: **сцена одна на всех в этом инстансе**: перед своей работой сохрани текущую сцену, если она не твоя.
 - **Ассеты: сначала проверь `get_addon_status`.** Если `libraries.polyhaven = off` — включи прямо в коде: `bpy.context.scene.blendermcp_use_polyhaven = True` (Poly Haven — CC0, без ключа; Sketchfab/PolyPizza — если владелец задал ключ). Генераторы (tripo/meshy/hunyuan/hyper3d) работают только с ключами — если off, собирай руками.
-- **Библиотека `blib.py`** (owner-контекст): `exec(open("/home/piagent/pi-agent/blender/tools/blib.py").read())` — материалы, примитивы, beam, verify/audit, studio, экспорт и превью одной строкой. Не-owner — сниппеты в `references/code-patterns.md`.
+- **Библиотека `blib.py`** (в папке скилла — `scripts/blib.py`): `exec(open("/home/piagent/.pi/agent/skills/blender/scripts/blib.py").read())` — материалы, примитивы, beam, verify/audit, studio, lathe/curve/shrinkwrap, экспорт и превью одной строкой. Сниппеты без файла — `references/code-patterns.md`.
 
 ## Пайплайн (проверен и прокачан 19.10.2026)
 Следуй фазам, не перескакивай:
@@ -116,4 +121,4 @@ description: 3D в Blender: собрать или поправить модел�
 - StraySpark «Blender MCP: Step-by-Step (2026)» — 3 hard limits: блокинг (не креатив), таймауты (start+poll), визуальный цикл через рендер.
 - Ресёрч Данила (19.10.2026): LL3M (код, не геометрия), blender-mcp (готовые ассеты Poly Haven/Sketchfab, картинка→3D), SceneCraft (scene graph → ограничения → солвер; библиотека функций), цикл «рендер → критик → правка», Fable Cities (разделённые builder/critic, «посмотри на картинку до отчёта»).
 - Ресёрч 19.10 (вечер): seehiong/blender-mcp-community (lathe_vase: SCREW-пайплайн, закрытый профиль = вода), seolithcomgh (кружка: профиль + ручка-кривая), Shrinkwrap для текста на кривых поверхностях.
-- Полные сниппеты кода — `references/code-patterns.md`; библиотека — `blender/tools/blib.py`.
+- Полные сниппеты кода — `references/code-patterns.md`; библиотека — `scripts/blib.py`; QA — `scripts/qa_check.py`; студийный свет — `scripts/studio.py`.

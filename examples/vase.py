@@ -2,7 +2,7 @@
 
 Run inside Blender MCP `execute_blender_code` with this repo as the working directory:
 
-    exec(open("tools/blib.py").read())
+    exec(open("skills/blender/scripts/blib.py").read())
     exec(open("examples/vase.py").read())
 
 The trick: describe the OUTER surface as a list of (radius, height) points,

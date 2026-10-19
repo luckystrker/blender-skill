@@ -7,13 +7,13 @@ Built in real sessions: every rule below exists because something broke without 
 ## What's inside
 
 ```
-skills/blender/SKILL.md                 the agent skill: phases, geometry rules, pitfalls
+skills/blender/SKILL.md                      the agent skill: phases, geometry rules, pitfalls
 skills/blender/references/code-patterns.md   copy-paste snippets (lathe, beams, verify, studio)
-tools/blib.py                           shared Python library for execute_blender_code
-tools/qa_check.py                       CLI audit: object list, sizes, transforms, materials
-tools/studio.py                         studio lighting / camera / floor setup
-examples/cup.py                         full walkthrough: a decorated ceramic mug
-examples/vase.py                        minimal lathe example (a vase in 30 lines)
+skills/blender/scripts/blib.py               shared Python library for execute_blender_code
+skills/blender/scripts/qa_check.py           CLI audit: objects, sizes, transforms, materials
+skills/blender/scripts/studio.py             studio lighting / camera / floor setup
+examples/cup.py                              full walkthrough: a decorated ceramic mug
+examples/vase.py                             minimal lathe example (a vase in 30 lines)
 ```
 
 ## The pipeline in one breath
@@ -53,7 +53,7 @@ uvx mcp-for-blender setup
 Then, inside `execute_blender_code`:
 
 ```python
-exec(open("tools/blib.py").read())          # load the library (materials, lathe, curve_tube, …)
+exec(open("skills/blender/scripts/blib.py").read())          # load the library (materials, lathe, curve_tube, …)
 ```
 
 and open `skills/blender/SKILL.md` as the agent skill (drop it into your agent's `skills/blender/`).
