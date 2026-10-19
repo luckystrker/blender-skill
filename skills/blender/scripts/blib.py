@@ -1,7 +1,7 @@
 """blib.py — общая библиотека 3D-паттернов для Blender-задач (загружается через exec).
 
 Загрузка в execute_blender_code:
-    exec(open("/home/piagent/pi-agent/blender/tools/blib.py").read())
+    exec(open("scripts/blib.py").read())  # из папки скилла
 
 Правила библиотеки:
   - кубы создаются size=2 (scale = полуразмер);

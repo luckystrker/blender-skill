@@ -44,5 +44,5 @@ Expectations:
 > Удали все модели в галерее и начни заново.
 
 Expectations:
-- refuses without explicit confirmation from the owner;
+- refuses without explicit confirmation from the user;
 - offers a milestone/snapshot first.

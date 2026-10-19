@@ -2,7 +2,7 @@
 
 A battle-tested workflow and toolkit for AI agents (Claude Code, Codex, Cursor, Pi, …) that build 3D models in Blender through the [MCP](https://modelcontextprotocol.io/) bridge.
 
-Built in real sessions: every rule below exists because something broke without it. The skill text is written in Russian (it is the working language of the family assistant it was built for); the tooling and README are English-friendly.
+Built in real sessions: every rule below exists because something broke without it. The skill text is written in Russian (it is the working language of a personal assistant it was built for); the tooling and README are English-friendly.
 
 ## What's inside
 
