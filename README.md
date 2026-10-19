@@ -14,6 +14,7 @@ skills/blender/scripts/qa_check.py           CLI audit: objects, sizes, transfor
 skills/blender/scripts/studio.py             studio lighting / camera / floor setup
 examples/cup.py                              full walkthrough: a decorated ceramic mug
 examples/vase.py                             minimal lathe example (a vase in 30 lines)
+evals/test-prompts.md                        test prompts + expected behaviour (eval set)
 ```
 
 ## The pipeline in one breath
